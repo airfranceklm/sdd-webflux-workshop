@@ -18,7 +18,7 @@ If you are part of the workshop and get stuck then ask an instructor for some as
 
 We hope you have a great evening and that you get excited about potentially using WebFlux in your future projects :).
 
-The complementary user interface can be found here **TODO: Add reference to UI project**.   
+The complementary user interface can be found here [workshop-openflight](https://github.com/maapteh/workshop-openflight).   
 
 ## Building
 
