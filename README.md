@@ -56,7 +56,7 @@ testing all the routes that you have created.
 The reference implementation has been build using the new functional style of route definitions, if you chose to base
 your controller on the classical approach using @RestController then remember to use ```@WebFluxTest(YourController.class)``` instead.
 
-### 03: Implement the /route/{origin-airport} resource
+### 03: Implement the /offers/{origin-airport} resource
 
 Now that you implemented your own controller let's dive directly into our main resource which will have some more complicated operations.
 
