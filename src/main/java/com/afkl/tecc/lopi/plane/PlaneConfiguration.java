@@ -24,7 +24,7 @@ public class PlaneConfiguration {
      */
     @Bean
     public CsvLineParser<Plane> planeCsvLineParser() {
-        return (line) -> CsvLineReader.read(line, 3, (data) -> new Plane(
+        return (line) -> CsvLineReader.read(line, 4, (data) -> new Plane(
                 data[0], // Name
                 data[1], // IATA code
                 data[2]) // ICAO code

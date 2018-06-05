@@ -29,7 +29,7 @@ public class AirportConfiguration {
      */
     @Bean
     public CsvLineParser<Airport> airportCsvLineParser() {
-        return (line) -> CsvLineReader.read(line, 13, (data) -> new Airport(
+        return (line) -> CsvLineReader.read(line, 14, (data) -> new Airport(
                 data[0], // Airport ID
                 data[1], // Name
                 data[2], // City

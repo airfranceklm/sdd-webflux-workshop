@@ -30,7 +30,7 @@ public class NetworkRouteConfiguration {
      */
     @Bean
     public CsvLineParser<NetworkRoute> routeCsvLineParser() {
-        return (line) -> CsvLineReader.read(line, 9, (data) -> new NetworkRoute(
+        return (line) -> CsvLineReader.read(line, 10, (data) -> new NetworkRoute(
                 data[0], // Airline code
                 data[1], // Airline ID
                 data[2], // Source Airport
