@@ -108,9 +108,17 @@ public class FlightOffer {
             return this;
         }
 
+        public String getOriginId() {
+            return originId;
+        }
+
         public Builder setOriginId(String originId) {
             this.originId = originId;
             return this;
+        }
+
+        public String getDestinationId() {
+            return destinationId;
         }
 
         public Builder setDestinationId(String destinationId) {
@@ -118,30 +126,22 @@ public class FlightOffer {
             return this;
         }
 
+        public String getPlaneId() {
+            return planeId;
+        }
+
         public Builder setPlaneId(String planeId) {
             this.planeId = planeId;
             return this;
         }
 
+        public String getAirlineId() {
+            return airlineId;
+        }
+
         public Builder setAirlineId(String airlineId) {
             this.airlineId = airlineId;
             return this;
-        }
-
-        public String getOriginId() {
-            return originId;
-        }
-
-        public String getDestinationId() {
-            return destinationId;
-        }
-
-        public String getPlaneId() {
-            return planeId;
-        }
-
-        public String getAirlineId() {
-            return airlineId;
         }
 
         public FlightOffer build() {

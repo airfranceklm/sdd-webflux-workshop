@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RequestPredicates.queryParam;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
@@ -38,7 +39,7 @@ public class AirlineConfiguration {
      */
     @Bean
     public CsvLineParser<Airline> airlineCsvLineParser() {
-        return (line) -> CsvLineReader.read(line, 8, (data) -> new Airline(
+        return (line) -> CsvLineReader.read(line, 9, (data) -> new Airline(
                 Integer.parseInt(data[0]), // Airline ID
                 data[1], // Name
                 data[2], // Alias
@@ -59,7 +60,8 @@ public class AirlineConfiguration {
 
     @Bean
     public RouterFunction<ServerResponse> airlineRoutes(AirlineHandler handler) {
-        return route(GET("/airlines"), handler::list);
+        return route(GET("/airlines").and(queryParam("q", (q) -> true)), handler::find)
+                .andRoute(GET("/airlines"), handler::list);
     }
 
     @Bean

@@ -3,8 +3,10 @@ package com.afkl.tecc.lopi.plane;
 import com.afkl.tecc.lopi.csv.CsvFileParser;
 import com.afkl.tecc.lopi.csv.CsvLineParser;
 import com.afkl.tecc.lopi.csv.CsvLineReader;
+import com.afkl.tecc.lopi.csv.DataRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 public class PlaneConfiguration {
@@ -24,7 +26,7 @@ public class PlaneConfiguration {
      */
     @Bean
     public CsvLineParser<Plane> planeCsvLineParser() {
-        return (line) -> CsvLineReader.read(line, 3, (data) -> new Plane(
+        return (line) -> CsvLineReader.read(line, 4, (data) -> new Plane(
                 data[0], // Name
                 data[1], // IATA code
                 data[2]) // ICAO code
@@ -36,6 +38,11 @@ public class PlaneConfiguration {
         // @formatter:off
         return new CsvFileParser<>() {};
         // @formatter:on
+    }
+
+    @Bean
+    public DataRepository<Plane> planeRepository(CsvFileParser<Plane> fileParser, CsvLineParser<Plane> lineParser) {
+        return new DataRepository<>(new ClassPathResource("/data/planes.dat"), fileParser, lineParser);
     }
 
 }

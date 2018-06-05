@@ -3,8 +3,10 @@ package com.afkl.tecc.lopi.route;
 import com.afkl.tecc.lopi.csv.CsvFileParser;
 import com.afkl.tecc.lopi.csv.CsvLineParser;
 import com.afkl.tecc.lopi.csv.CsvLineReader;
+import com.afkl.tecc.lopi.csv.DataRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 public class NetworkRouteConfiguration {
@@ -30,14 +32,14 @@ public class NetworkRouteConfiguration {
      */
     @Bean
     public CsvLineParser<NetworkRoute> routeCsvLineParser() {
-        return (line) -> CsvLineReader.read(line, 9, (data) -> new NetworkRoute(
+        return (line) -> CsvLineReader.read(line, 10, (data) -> new NetworkRoute(
                 data[0], // Airline code
                 data[1], // Airline ID
                 data[2], // Source Airport
                 data[3], // Source Airport ID
                 data[4], // Destination Airport
                 data[5], // Destination Airport ID
-                data[6].equals("Y"), // Codeshare
+                data[6] != null && data[6].equals("Y"), // Codeshare
                 Integer.parseInt(data[7]), // Number of Stops
                 data[8] != null ? data[8].split(" ")[0].trim() : null // Equipment
         ));
@@ -48,6 +50,11 @@ public class NetworkRouteConfiguration {
         // @formatter:off
         return new CsvFileParser<>() {};
         // @formatter:on
+    }
+
+    @Bean
+    public DataRepository<NetworkRoute> routeRepository(CsvFileParser<NetworkRoute> fileParser, CsvLineParser<NetworkRoute> lineParser) {
+        return new DataRepository<>(new ClassPathResource("/data/routes.dat"), fileParser, lineParser);
     }
 
 }

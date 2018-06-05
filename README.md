@@ -78,12 +78,13 @@ generate a random price while you are doing it (a random int from 0 -> 1000 will
 - for **each destination airport** retrieve the full airport details from the data set using the airport repository.
 - for **each offer** retrieve the full airline details from the data set using the airline repository.
 - for **each offer that has a plane id** retrieve the full aircraft details using the plane repository.
-- Delay each emitted element by 250 milliseconds.
+- Delay each emitted element by 250 milliseconds to mimic a slow backend system.
 - Try to run the reactive stream in parallel! tip: it makes a big difference where you define it in the stream.
 
 **BONUS**: Some developers might be used to using [ThreadLocal's](https://docs.oracle.com/javase/10/docs/api/java/lang/ThreadLocal.html).
-This unfortunately will not work in a reactive environment, however reactor has a solution for this exact case. Try to 
-set the start time as a value somewhere and log the total processing time **when the stream completes**.
+This unfortunately will not work in a reactive environment, however reactor has a solution for this exact case. Try to
+set a bound value somehow for your fare generate (i.e. Random or SecureRandom) and retrieve it when you need it within
+a reactive stream processor. 
 
 
 ### 04: Experiment!

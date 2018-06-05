@@ -3,8 +3,10 @@ package com.afkl.tecc.lopi.airport;
 import com.afkl.tecc.lopi.csv.CsvFileParser;
 import com.afkl.tecc.lopi.csv.CsvLineParser;
 import com.afkl.tecc.lopi.csv.CsvLineReader;
+import com.afkl.tecc.lopi.csv.DataRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 public class AirportConfiguration {
@@ -29,7 +31,7 @@ public class AirportConfiguration {
      */
     @Bean
     public CsvLineParser<Airport> airportCsvLineParser() {
-        return (line) -> CsvLineReader.read(line, 13, (data) -> new Airport(
+        return (line) -> CsvLineReader.read(line, 14, (data) -> new Airport(
                 data[0], // Airport ID
                 data[1], // Name
                 data[2], // City
@@ -50,6 +52,11 @@ public class AirportConfiguration {
         // @formatter:off
         return new CsvFileParser<>() {};
         // @formatter:on
+    }
+
+    @Bean
+    public DataRepository<Airport> airportRepository(CsvFileParser<Airport> fileParser, CsvLineParser<Airport> lineParser) {
+        return new DataRepository<>(new ClassPathResource("/data/airports.dat"), fileParser, lineParser);
     }
 
 }
