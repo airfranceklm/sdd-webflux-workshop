@@ -23,9 +23,6 @@ public class AirlineHandler {
     }
 
     protected Mono<ServerResponse> list(ServerRequest req) {
-        if (req.queryParam("q").isPresent()) {
-            return find(req);
-        }
         var size = req.queryParam("size").map(Integer::parseInt)
                 .filter((s) -> s > 0)
                 .orElse(10);
@@ -45,7 +42,7 @@ public class AirlineHandler {
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 
-    private Mono<ServerResponse> find(ServerRequest req) {
+    protected Mono<ServerResponse> find(ServerRequest req) {
         return req.queryParam("q").map((query) -> repository.stream()
                 .filter((a) -> a.getName().toLowerCase().contains(query.toLowerCase()))
                 .collectList()
