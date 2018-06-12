@@ -109,6 +109,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.afkl.tecc.lopi.LopiApi</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

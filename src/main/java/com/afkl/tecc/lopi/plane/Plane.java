@@ -1,5 +1,8 @@
 package com.afkl.tecc.lopi.plane;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Data holder for plane data.
  * Unfortunately lombok does not work with JDK10, see link below.
@@ -12,7 +15,10 @@ public class Plane {
     private final String iataId;
     private final String icaoId;
 
-    public Plane(String name, String iataId, String icaoId) {
+    @JsonCreator
+    public Plane(@JsonProperty("name") String name,
+                 @JsonProperty("iataId") String iataId,
+                 @JsonProperty("icaoId") String icaoId) {
         this.name = name;
         this.iataId = iataId;
         this.icaoId = icaoId;

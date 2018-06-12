@@ -3,6 +3,8 @@ package com.afkl.tecc.lopi.offer;
 import com.afkl.tecc.lopi.airline.Airline;
 import com.afkl.tecc.lopi.airport.Airport;
 import com.afkl.tecc.lopi.plane.Plane;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Data holder for flight offers.
@@ -19,12 +21,13 @@ public class FlightOffer {
     private final int stops;
     private final int fare;
 
-    public FlightOffer(Airport destination,
-                       Plane plane,
-                       Airline airline,
-                       boolean codeshare,
-                       int stops,
-                       int fare) {
+    @JsonCreator
+    public FlightOffer(@JsonProperty("destination") Airport destination,
+                       @JsonProperty("plane") Plane plane,
+                       @JsonProperty("airline") Airline airline,
+                       @JsonProperty("codeshare") boolean codeshare,
+                       @JsonProperty("stops") int stops,
+                       @JsonProperty("fare") int fare) {
         this.destination = destination;
         this.plane = plane;
         this.airline = airline;

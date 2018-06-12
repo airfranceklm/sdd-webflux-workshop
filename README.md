@@ -92,6 +92,11 @@ a reactive stream processor.
 This sample project can be used to experiment with the features provided by Spring & Reactor, so if you have some time
 remaining then define what you would like to experiment with and try it out!
 
+### WebClient
+
+An example of Spring's WebClient can be found [here](src/main/java/com/afkl/tecc/lopi/LopiWebClientExample.java), start it
+after the server has been started.
+
 ## Conclusion
 
 We hope you found this workshop useful and that it has sparked your interest in using Spring WebFlux & Reactor. The solution
