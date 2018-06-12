@@ -44,11 +44,11 @@ public class FlightOfferHandler {
         var origin = req.pathVariable("origin");
         // Start with the routes, these contain all possible destinations (airports) from a specific origin (airport).
         var publisher = routes
-                .parallel()
-                .runOn(Schedulers.parallel()) // This will be quite a big operation, so lets run it in parallel
                 .filter((route) -> route.getSourceAirport().equalsIgnoreCase(origin) &&
                         route.getAirline() != null &&
                         route.getDestinationAirport() != null) // Make sure we only have entities we can resolve, and filter out all the incomplete ones
+                .parallel()
+                .runOn(Schedulers.parallel()) // This will be quite a big operation, so lets run it in parallel
                 .flatMap((route) -> Mono.subscriberContext().map((ctx) -> {
                     int bound = ctx.get("bound");
                     return FlightOffer.newBuilder() // Convert a NetworkRoute to a FlightOffer.Builder, we can use the builder to set the missing values in the next steps
@@ -69,7 +69,8 @@ public class FlightOfferHandler {
                         .map((plane) -> builder.setPlane(plane)) : Flux.just(builder))
                 .map((builder) -> builder.build()) // Build the final immutable FlightOffer instance
                 .filter((offer) -> offer.getDestination() != null) // some destinations might still be missing, filter them out to avoid client side issues
-                .sequential().delayElements(Duration.of(250, MILLIS)) // Delay entities pushed to the client to simulate a slower backend system
+                .sequential()
+                .delayElements(Duration.of(100, MILLIS)) // Delay entities pushed to the client to simulate a slower backend system
                 .onBackpressureDrop() // Should backpressure occur simply dump them as they are not of vital importance in this specific case, other scenarios might require other backpressure strategies
                 .subscriberContext((ctx) -> ctx.put("bound", 1000)); // Set the bound in the context, to be used by the random number generator
         return ServerResponse.ok()
