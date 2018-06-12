@@ -56,7 +56,7 @@ public class FlightOfferHandler {
                             .setOriginId(route.getSourceAirport())
                             .setDestinationId(route.getDestinationAirport())
                             .setPlaneId(route.getEquipment())
-                            .setFare(RANDOM.nextInt(bound)); // Generate a price
+                            .setFare(99 + RANDOM.nextInt(bound)); // Generate a price
                 }))
                 .flatMap((builder) -> airlines // Retrieve full airline details
                         .filter((airline) -> airline.getIataId() != null && airline.getIataId().equals(builder.getAirlineId()))

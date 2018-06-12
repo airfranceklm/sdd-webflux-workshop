@@ -1,6 +1,6 @@
 # LOPI - Lowest Price Finder
 
-This project is used as workshop material during the Schiphol Developers Group on June 7th 2018 @ KLM.
+This project is used as workshop material during the Schiphol Developers Group on June 14th 2018 @ KLM.
 However the workshop can be followed by anybody interested in playing with some features from 
 Spring's WebFlux module.
 
@@ -28,7 +28,7 @@ The complementary user interface can be found here [workshop-openflight](https:/
 - This project makes use of [Spring Developer Tools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html)
 which means that (most of the time) you only have to compile your code to force a refresh of your application (i.e. in IntelliJ on a Mac with ```⌘F9```)
 Sometimes however it still requires a full restart, so if you get some strange behaviour restart first and try again before you start debugging :).
-- The server is configured to run on port 9090, if you wish to run on a different port change the ```server.port``` property in the 
+- The server is configured to run on port 8080, if you wish to run on a different port change the ```server.port``` property in the 
 [application.properties](src/main/resources/application.properties) file.
 - This starter kit comes with one available endpoint as a reference *example* that will be available on ```http://localhost:9090/airlines```
 
@@ -94,7 +94,7 @@ remaining then define what you would like to experiment with and try it out!
 
 ### WebClient
 
-An example of Spring's WebClient can be found [here](src/main/java/com/afkl/tecc/lopi/LopiWebClientExample.java), start it
+An example of Spring's WebClient can be fouSund [here](src/main/java/com/afkl/tecc/lopi/LopiWebClientExample.java), start it
 after the server has been started.
 
 ## Conclusion
