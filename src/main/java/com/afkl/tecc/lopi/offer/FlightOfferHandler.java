@@ -24,29 +24,26 @@ public class FlightOfferHandler {
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
-    private final DataRepository<Plane> planeRepository;
-    private final DataRepository<Airport> airportRepository;
-    private final DataRepository<Airline> airlineRepository;
-    private final DataRepository<NetworkRoute> routeRepository;
+    private final Flux<Plane> planes;
+    private final Flux<Airport> airports;
+    private final Flux<Airline> airlines;
+    private final Flux<NetworkRoute> routes;
 
     @Autowired
     public FlightOfferHandler(DataRepository<Plane> planeRepository,
                               DataRepository<Airport> airportRepository,
                               DataRepository<Airline> airlineRepository,
                               DataRepository<NetworkRoute> routeRepository) {
-        this.planeRepository = planeRepository;
-        this.airportRepository = airportRepository;
-        this.airlineRepository = airlineRepository;
-        this.routeRepository = routeRepository;
+        this.planes = planeRepository.stream();
+        this.airports = airportRepository.stream();
+        this.airlines = airlineRepository.stream();
+        this.routes = routeRepository.stream();
     }
 
     public Mono<ServerResponse> streamOffers(ServerRequest req) {
-        var airports = airportRepository.stream();
-        var airlines = airlineRepository.stream();
-        var planes = planeRepository.stream();
         var origin = req.pathVariable("origin");
         // Start with the routes, these contain all possible destinations (airports) from a specific origin (airport).
-        var publisher = routeRepository.stream()
+        var publisher = routes
                 .parallel()
                 .runOn(Schedulers.parallel()) // This will be quite a big operation, so lets run it in parallel
                 .filter((route) -> route.getSourceAirport().equalsIgnoreCase(origin) &&
@@ -78,6 +75,10 @@ public class FlightOfferHandler {
         return ServerResponse.ok()
                 .contentType(TEXT_EVENT_STREAM)
                 .body(publisher, FlightOffer.class);
+    }
+
+    public Mono<ServerResponse> allowedMethods(ServerRequest request) {
+        return ServerResponse.ok().header("Allow", "OPTIONS, GET").build();
     }
 
 }

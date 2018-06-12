@@ -19,7 +19,7 @@ public class DataRepository<T> {
 
     public Flux<T> stream() {
         try {
-            return csvFileParser.parse(Paths.get(resource.getURI()), csvLineParser).cache();
+            return csvFileParser.read(resource.getInputStream(), csvLineParser).cache();
         } catch (Throwable t) {
             return Flux.error(t);
         }
