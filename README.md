@@ -1,6 +1,6 @@
 # LOPI - Lowest Price Finder
 
-This project is used as workshop material during the Schiphol Developers Group on June 7th 2018 @ KLM.
+This project is used as workshop material during the Schiphol Developers Group on June 14th 2018 @ KLM.
 However the workshop can be followed by anybody interested in playing with some features from 
 Spring's WebFlux module.
 
@@ -96,4 +96,9 @@ remaining then define what you would like to experiment with and try it out!
 We hope you found this workshop useful and that it has sparked your interest in using Spring WebFlux & Reactor. The solution
 to assignment 02 can be found in branch 'feature-flight-offers'.
 
- 
+## Additional resources
+
+- [Project Reactor Samples](https://github.com/reactor/reactor-samples)
+- [Spring WebFlux documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#spring-webflux)
+- [Spring's Reactive WebClient](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#webflux-client)
+    - [WebClient configuration in Boot](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-webclient.html) 
