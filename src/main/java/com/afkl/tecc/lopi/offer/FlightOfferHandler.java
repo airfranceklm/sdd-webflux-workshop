@@ -44,11 +44,11 @@ public class FlightOfferHandler {
         var origin = req.pathVariable("origin");
         // Start with the routes, these contain all possible destinations (airports) from a specific origin (airport).
         var publisher = routes
+                .parallel()
+                .runOn(Schedulers.parallel()) // This will be quite a big operation, so lets run it in parallel
                 .filter((route) -> route.getSourceAirport().equalsIgnoreCase(origin) &&
                         route.getAirline() != null &&
                         route.getDestinationAirport() != null) // Make sure we only have entities we can resolve, and filter out all the incomplete ones
-                .parallel()
-                .runOn(Schedulers.parallel()) // This will be quite a big operation, so lets run it in parallel
                 .flatMap((route) -> Mono.subscriberContext().map((ctx) -> {
                     int bound = ctx.get("bound");
                     return FlightOffer.newBuilder() // Convert a NetworkRoute to a FlightOffer.Builder, we can use the builder to set the missing values in the next steps
