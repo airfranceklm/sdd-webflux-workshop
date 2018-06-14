@@ -58,6 +58,8 @@ public class FlightOfferHandler {
                             .setPlaneId(route.getEquipment())
                             .setFare(99 + RANDOM.nextInt(bound)); // Generate a price
                 }))
+                .sequential()
+                .delayElements(Duration.of(100, MILLIS)) // Delay entities pushed to the client to simulate a slower backend system
                 .flatMap((builder) -> airlines // Retrieve full airline details
                         .filter((airline) -> airline.getIataId() != null && airline.getIataId().equals(builder.getAirlineId()))
                         .map((airline) -> builder.setAirline(airline)))
@@ -69,8 +71,6 @@ public class FlightOfferHandler {
                         .map((plane) -> builder.setPlane(plane)) : Flux.just(builder))
                 .map((builder) -> builder.build()) // Build the final immutable FlightOffer instance
                 .filter((offer) -> offer.getDestination() != null) // some destinations might still be missing, filter them out to avoid client side issues
-                .sequential()
-                .delayElements(Duration.of(20, MILLIS)) // Delay entities pushed to the client to simulate a slower backend system
                 .onBackpressureDrop() // Should backpressure occur simply dump them as they are not of vital importance in this specific case, other scenarios might require other backpressure strategies
                 .subscriberContext((ctx) -> ctx.put("bound", 1000)); // Set the bound in the context, to be used by the random number generator
         return ServerResponse.ok()
