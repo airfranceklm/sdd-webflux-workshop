@@ -102,3 +102,6 @@ to assignment 02 can be found in branch 'feature-flight-offers'.
 - [Spring WebFlux documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#spring-webflux)
 - [Spring's Reactive WebClient](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#webflux-client)
     - [WebClient configuration in Boot](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-webclient.html) 
+
+## Contact
+&#x67;&#x6f;&#114;&#97;&#x6e;&#x2e;&#110;&#x69;&#107;&#111;&#x6c;&#x69;&#x63;&#64;&#x6b;&#x6c;&#x6d;&#46;&#x63;&#x6f;&#x6d;
