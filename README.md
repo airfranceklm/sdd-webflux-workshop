@@ -28,9 +28,9 @@ The complementary user interface can be found here [workshop-openflight](https:/
 - This project makes use of [Spring Developer Tools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html)
 which means that (most of the time) you only have to compile your code to force a refresh of your application (i.e. in IntelliJ on a Mac with ```⌘F9```)
 Sometimes however it still requires a full restart, so if you get some strange behaviour restart first and try again before you start debugging :).
-- The server is configured to run on port 9090, if you wish to run on a different port change the ```server.port``` property in the 
+- The server is configured to run on port 8080, if you wish to run on a different port change the ```server.port``` property in the 
 [application.properties](src/main/resources/application.properties) file.
-- This starter kit comes with one available endpoint as a reference *example* that will be available on ```http://localhost:9090/airlines```
+- This starter kit comes with one available endpoint as a reference *example* that will be available on ```http://localhost:8080/airlines```
 
 ## Assignments
 
