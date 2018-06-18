@@ -30,7 +30,7 @@ which means that (most of the time) you only have to compile your code to force 
 Sometimes however it still requires a full restart, so if you get some strange behaviour restart first and try again before you start debugging :).
 - The server is configured to run on port 8080, if you wish to run on a different port change the ```server.port``` property in the 
 [application.properties](src/main/resources/application.properties) file.
-- This starter kit comes with one available endpoint as a reference *example* that will be available on ```http://localhost:8080/airlines```
+- This starter kit comes with one available endpoint as a reference *example* that will be available on ```http://localhost:9090/airlines```
 
 ## Assignments
 
@@ -82,14 +82,20 @@ generate a random price while you are doing it (a random int from 0 -> 1000 will
 - Try to run the reactive stream in parallel! tip: it makes a big difference where you define it in the stream.
 
 **BONUS**: Some developers might be used to using [ThreadLocal's](https://docs.oracle.com/javase/10/docs/api/java/lang/ThreadLocal.html).
-This unfortunately will not work in a reactive environment, however reactor has a solution for this exact case. Try to 
-set the start time as a value somewhere and log the total processing time **when the stream completes**.
+This unfortunately will not work in a reactive environment, however reactor has a solution for this exact case. Try to
+set a bound value somehow for your fare generate (i.e. Random or SecureRandom) and retrieve it when you need it within
+a reactive stream processor. 
 
 
 ### 04: Experiment!
 
 This sample project can be used to experiment with the features provided by Spring & Reactor, so if you have some time
 remaining then define what you would like to experiment with and try it out!
+
+### WebClient
+
+An example of Spring's WebClient can be fouSund [here](src/main/java/com/afkl/tecc/lopi/LopiWebClientExample.java), start it
+after the server has been started.
 
 ## Conclusion
 
@@ -101,7 +107,7 @@ to assignment 02 can be found in branch 'feature-flight-offers'.
 - [Project Reactor Samples](https://github.com/reactor/reactor-samples)
 - [Spring WebFlux documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#spring-webflux)
 - [Spring's Reactive WebClient](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#webflux-client)
-    - [WebClient configuration in Boot](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-webclient.html) 
+    - [WebClient configuration in Boot](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-webclient.html)
 
-## Contact
-&#x67;&#x6f;&#114;&#97;&#x6e;&#x2e;&#110;&#x69;&#107;&#111;&#x6c;&#x69;&#x63;&#64;&#x6b;&#x6c;&#x6d;&#46;&#x63;&#x6f;&#x6d;
+
+ 
